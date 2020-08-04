@@ -39,7 +39,8 @@
             document.writeln(items[i]);
             document.writeln('<br>');
         }
-
+        
+        // 方法二：
         var arrays = [
             ["a0", "a1", "a2", "a3"],
             ["b0", "b1", "b2", "b3"],
@@ -68,8 +69,10 @@
             };
             return arr;
         }
+        console.log("方法二=====================>");
         console.log(array);
 
+        // 方法三：
         function serialArray(arr) {
             var lengthArr = [];
             var productArr = [];
@@ -91,6 +94,7 @@
             }
             return result
         }
+        console.log("方法三=====================>");
         var myArr = [
             ['A', 'B', 'C'],
             ['A1', 'B1', 'C1'],
