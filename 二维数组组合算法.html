@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function combination(originalData) {
+            var length = originalData.length;
+            if (length < 2) {
+                return originalData[0];
+            }
+            var firstArrayLength = originalData[0].length;
+            var secondArrayLength = originalData[1].length;
+            var result = [];
+            for (var firstIndex = 0; firstIndex < firstArrayLength; firstIndex++) {
+                for (var secondIndex = 0; secondIndex < secondArrayLength; secondIndex++) {
+                    result[result.length] = originalData[0][firstIndex] + ',' + originalData[1][secondIndex];
+                }
+            }
+            var tmpResult = [];
+            for (var i = 2; i < originalData.length; i++) {
+                tmpResult[i - 1] = originalData[i];
+            }
+            tmpResult[0] = result;
+            return combination(tmpResult);
+        }
+        var array = [
+            ['红', '黄', '蓝'],
+            ['S', 'L', 'M'],
+            ['男款', '女款']
+        ];
+        var items = combination(array);
+        for (var i = 0; i < items.length; i++) {
+            document.writeln(items[i]);
+            document.writeln('<br>');
+        }
+
+        var arrays = [
+            ["a0", "a1", "a2", "a3"],
+            ["b0", "b1", "b2", "b3"],
+            ["c0", "c1", "c2", "c3"],
+            ["d0", "d1", "d2", "d3"]
+        ];
+        var array = getArrayByArrays(arrays);
+
+        function getArrayByArrays(arrays) {
+            var arr = [""];
+            for (var i = 0; i < arrays.length; i++) {
+                arr = getValuesByArray(arr, arrays[i]);
+            }
+            return arr;
+        }
+
+        function getValuesByArray(arr1, arr2) {
+            var arr = [];
+            for (var i = 0; i < arr1.length; i++) {
+                var v1 = arr1[i];
+                for (var j = 0; j < arr2.length; j++) {
+                    var v2 = arr2[j];
+                    var value = v1 + v2;
+                    arr.push(value);
+                };
+            };
+            return arr;
+        }
+        console.log(array);
+
+        function serialArray(arr) {
+            var lengthArr = [];
+            var productArr = [];
+            var result = [];
+            var length = 1;
+            for (var i = 0; i < arr.length; i++) {
+                var len = arr[i].length;
+                lengthArr.push(len);
+                var product = i === 0 ? 1 : arr[i - 1].length * productArr[i - 1];
+                productArr.push(product);
+                length *= len;
+            }
+            for (var i = 0; i < length; i++) {
+                var resultItem = '';
+                for (var j = 0; j < arr.length; j++) {
+                    resultItem += arr[j][Math.floor(i / productArr[j]) % lengthArr[j]];
+                }
+                result.push(resultItem);
+            }
+            return result
+        }
+        var myArr = [
+            ['A', 'B', 'C']
+        ];
+        console.log(serialArray(myArr));
+        var myArr1 = [
+            ['A', 'B', 'C'],
+            ['A1', 'B1', 'C1', 'D1', 'E1', 'F1'],
+            ['A2', 'B2', 'C2'],
+            ['A3', 'B3', 'C3', 'D3']
+        ];
+        console.log(serialArray(myArr1));
+        var myArr2 = [
+            ['A', 'B', 'C'],
+            ['A1', 'B1', 'C1', 'D1'],
+            ['A2', 'B2', 'C2']
+        ];
+        console.log(serialArray(myArr2));
+    </script>
+</body>
+
+</html>
